@@ -1,13 +1,15 @@
 language: ruby
 rvm:
-  - 2.3.3
-
+- 2.3.3
 before_install:
-  - cd site 
-script: 
-  - bundle exec jekyll build
-  - mv _site/app.yaml .
+- cd site
+- echo $super_secret_password | gpg --passphrase-fd 0 hnpwatest.json.gpg
+script:
+- bundle exec jekyll build
 deploy:
   provider: gae
-  keyfile: service-acc.json
-  project: hnpwa-prod
+  keyfile: hnpwatest.json
+  project: hnpwatest
+env:
+  global:
+  - secure: kfuUppdVXm7lPJUJ5O0oWZYm4CXbIAxbR3EN7Eo7jjfEF/wfFGCZBZTLtPDEe7wE36uqk7/H5Q30kci9/gm5IViisFuhIZzA2AUqRisiJa13yJTIMAgep4Q0hnvDPQFB6s3xYpNlj6s5SjTJj7ZDWYNlEP7XMNiKlq++rSwtF2rFWaL0QTTfx2xQ6VAZnIE/AKC0T9tRs618OZG9P+inIvLzwNXHPxo42v8RZmnWO0+xoA7q4w2Ai61pZtsFUhdaS7FLmqXx9eDurWbOrNy7+bVRolp5OvJq9wEO3zzfWNJ+btVGaGYL9ftClsnEpBt0F4E/4ueWN5DAZB92lD6nfa0pFgI0mcJVlMRNiqpvPbPOHicE9fPEhFaG9O2Pu29caTammdpuJtsvKQLXCYXcz1hyHiTi09j/UJR79AOfZXjMH5iyfIzrHkAV2aqPePvtpAt9WHwposNsBycTbhnU/KwhSbZ7krHPMBvUashq8AcRc7jtZboKxLSVSMeWj+l/QqrTyyEWfRP8ge2mRbL4mrjFC953nP5jv4xIIfztBihmFndj/Z7s2+w8YJcgUKGRoerjFVuj2Dk1nFqJVpzzO6NuGi5y0nqtpo/3XJCvH18D0gbc4b/rDODIKLmHsyhRqTl151SlwflRWRTwK1wJjGYJdPW6nv2bZse/v7MQhkE=
